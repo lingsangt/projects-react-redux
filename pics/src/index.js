@@ -49,5 +49,7 @@ In the controlled version, we store the value in the React World as
 state = {term: 'hi there}, and for the DOM to retrieve the value of the input, 
 we have <input value={go look at state to get current value}/>.
 
+In controlled, we could even reformat the input easily, like using
+onChange={e=>this.setState({term: e.target.value.toUpperCase()})}
 
 */
