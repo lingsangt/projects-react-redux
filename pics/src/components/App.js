@@ -6,7 +6,17 @@ import SearchBar from './SearchBar';
 
 class App extends React.Component {
 
-    async onSearchSubmit(term) {
+    /*
+    Initialize images state to be empty array instead of null, so that 
+    app would not crash if we had to access property of images (say, length) 
+    before search is returned.
+    */
+    state = {images: []};
+
+    /*
+    We have to use this.setState, so we use an arrow function.
+    */
+    onSearchSubmit = async term => {
 
         /*
         As per axios documentation https://unsplash.com/documentation#search-photos, to get a single page of photo results for
@@ -28,7 +38,7 @@ class App extends React.Component {
 
         });
 
-        console.log (response.data.results);
+        this.setState ({images: response.data.results});
 
     }
 
@@ -36,6 +46,7 @@ class App extends React.Component {
         return (
             <div className="ui conatiner" style={{ marginTop: '10px' }}>
                 <SearchBar onSubmit={this.onSearchSubmit} />
+                Found: {this.state.images.length} images
             </div>
         );
     }
