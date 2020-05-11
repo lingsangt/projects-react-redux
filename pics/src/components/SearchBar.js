@@ -2,15 +2,69 @@ import React from 'react';
 
 class SearchBar extends React.Component {
 
-    onInputChange (event){
+    state = {term: ''};
 
-        /*
-        For input type="text" onChange event, event.target.value is the 
-        input text the user entered.
-        */
-        console.log (event.target.value);
+    /*
+    Note on if onFormSubmit were not an arrow function and we had as follows:
+
+    onFormSubmit (event){
+        console.log (this.state.term);
     }
 
+    There would be a TypeError: Cannot read property 'state' of undefined.
+
+    'this' does not refer to an instance of the class SearchBar. For details on 
+    what it may refer to, see https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/ 
+
+
+    One solution is to bind the function in the constructor by adding this
+    line to the constructor:
+
+    this.onFormSubmit = this.onFormSubmit.bind (this);
+
+    That line would then ensure that when the keyword 'this' is used in 
+    onFormSubmit, it would refer to an instance of the class SearchBar. However,
+    binding may not transpile well in Babel.
+
+
+
+    Another solution is to write it as an arrow function as below. The difference?
+
+    The way we wrote it above is a shorthand for this, with the keyword function:
+
+    onFormSubmit: function(event){
+        console.log (this.state.term);
+    }
+
+    And every time we have the keyword function, we get a broken value for 'this.'
+
+    However, one feature of arrow functions is that it automatically binds the 
+    value of 'this'.
+
+
+
+    A third solution would be, instead of writing this in the render function
+
+    <form onSubmit={this.onFormSubmit} ...
+
+    we wrap that into an arrow function as
+
+    <form onSubmit={() => this.onFormSubmit ()} ... 
+
+    */
+    onFormSubmit = event => {
+
+        //Don't want the form to automatically submit itself and refresh the page
+        event.preventDefault ();
+
+        /*
+        Note that in a functional component, we would write props.onSubmit, whereas
+        because we are in a class component here, we have to write this.props.onSubmit
+        here instead.
+        */
+        this.props.onSubmit (this.state.term);
+    }
+    
     render(){
 
         /*
@@ -27,10 +81,14 @@ class SearchBar extends React.Component {
         */
         return (
             <div className="ui segment">
-                <form className = "ui form">
+                <form onSubmit={this.onFormSubmit} className = "ui form">
                     <div className="field">
                         <label>Image Search</label>
-                        <input type="text" onChange={this.onInputChange}/>
+                        <input 
+                            type="text" 
+                            value={this.state.term}
+                            onChange={e=>this.setState({term: e.target.value})}
+                        />
                     </div>
                 </form>
             </div>
@@ -38,3 +96,4 @@ class SearchBar extends React.Component {
     }
 }
 export default SearchBar;
+
