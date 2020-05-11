@@ -20,7 +20,7 @@ class App extends React.Component {
         Go to public actions under Authorizations for documentation on adding 
         headers.
         */
-        axios.get ('https://unsplash.com/search/photos', {
+        axios.get ('https://api.unsplash.com/search/photos', {
             params: {query: term},
             headers: {
                 Authorization: 'Client-ID n-T-wgrEgXFEPrBwFWwb6hwfhehvimCFowi8rX8qIlc'
