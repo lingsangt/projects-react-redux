@@ -41,7 +41,7 @@ This network request is a asychronous request, so there are two ways to make
 it so that we can wait for the axios request to complete before moving onto 
 logging the number of images fetched in the function.
 
-Method 1:
+Method 1: Use .then
 Whenever we make a request to axios, it returns a promise object. We can 
 chain on .then as follows: 
 
@@ -61,6 +61,9 @@ This logs the whole object returned from the search query, including the status
 (200 for request was successful), statusText, config for the request, and most
 importantly, the data.results property that contains the list of images returned.
 
+
+Method 2: Use async await syntax
+See this implemented in App.js
 
 
 

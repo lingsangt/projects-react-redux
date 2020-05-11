@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 
 class App extends React.Component {
 
-    onSearchSubmit(term) {
+    async onSearchSubmit(term) {
 
         /*
         As per axios documentation https://unsplash.com/documentation#search-photos, to get a single page of photo results for
@@ -20,15 +20,15 @@ class App extends React.Component {
         Go to public actions under Authorizations for documentation on adding 
         headers.
         */
-        axios.get('https://api.unsplash.com/search/photos', {
+        const response = await axios.get('https://api.unsplash.com/search/photos', {
             params: { query: term },
             headers: {
                 Authorization: 'Client-ID n-T-wgrEgXFEPrBwFWwb6hwfhehvimCFowi8rX8qIlc'
             }
 
-        }).then(response => {
-            console.log (response.data.results);
         });
+
+        console.log (response.data.results);
 
     }
 
