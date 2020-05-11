@@ -1,10 +1,33 @@
 import React from 'react';
+import axios from 'axios';
+
 import SearchBar from './SearchBar';
+
 
 class App extends React.Component {
 
     onSearchSubmit (term){
-        console.log (term);
+
+        /*
+        As per axios documentation https://unsplash.com/documentation#search-photos, to get a single page of photo results for
+        a query, make a get request:
+
+        GET /search/photos
+
+        Go to 'Location' under 'Schema' to see that the root address to make
+        the request at is https://unsplash.com/
+
+        Go to public actions under Authorizations for documentation on adding 
+        headers.
+        */
+        axios.get ('https://unsplash.com/search/photos', {
+            params: {query: term},
+            headers: {
+                Authorization: 'Client-ID n-T-wgrEgXFEPrBwFWwb6hwfhehvimCFowi8rX8qIlc'
+            }
+
+        });
+
     }
 
     render (){
