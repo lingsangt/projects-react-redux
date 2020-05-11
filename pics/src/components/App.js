@@ -51,7 +51,7 @@ class App extends React.Component {
         return (
             <div className="ui conatiner" style={{ marginTop: '10px' }}>
                 <SearchBar onSubmit={this.onSearchSubmit} />
-                Found: {this.state.images.length} images
+                <ImageList images={this.state.images} />
             </div>
         );
     }
