@@ -6,7 +6,7 @@ import App from './components/App';
 ReactDOM.render (<App />, document.querySelector ('#root'));
 
 /*
-Part 2
+Part 2: Reading Search Input
 
 
 In SearchBar.js, we have the input element as an uncontrolled element:
@@ -50,6 +50,31 @@ state = {term: 'hi there}, and for the DOM to retrieve the value of the input,
 we have <input value={go look at state to get current value}/>.
 
 In controlled, we could even reformat the input easily, like using
-onChange={e=>this.setState({term: e.target.value.toUpperCase()})}
+onChange={e=>this.setState({term: e.target.value.toUpperCase()})}.
+
+
+
+In part 2, we also work out a way to submit the information on the form from
+the SearchBar. 
+
+We first have to workout a small issue on using the keyword 'this' inside 
+the function onFormSubmit. The notes for this is written in SearchBar.js. 
+
+
+
+Then, we have to work out how to pass the input from the SearchBar back up to 
+App, so that App could make the API to fetch the results. Recall that in the 
+'flowchart', App go 'down' to the children SearchBar and ImageList. Since props 
+can only be passed down from parent to child in the flowchart, we cannot just 
+simply pass the input in SearchBar as a prop back to App. 
+
+Instead, we use a trick. We turn App into a class-based component. In App, 
+define a call-back called this.onSearchSubmit, and pass this.onSearchSubmit 
+as a prop to SearchBar. Then, in onFormSubmit in SearchBar, we can pass the input 
+back to App by calling this.props.onSubmit (this.state.term).
+
+
+
+
 
 */
