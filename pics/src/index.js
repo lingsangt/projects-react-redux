@@ -22,4 +22,46 @@ unsplash.com/developers
 
 
 
+Handling Axios Requests
+So far, we have this for fetching images: 
+
+onSearchSubmit (term){
+    axios.get ('https://api.unsplash.com/search/photos', {
+    params: {query: term},
+    headers: {
+        Authorization: 'Client-ID n-T-wgrEgXFEPrBwFWwb6hwfhehvimCFowi8rX8qIlc'
+    }
+
+});
+
+
+Let's say we want the app to print out the number of images requests. 
+
+This network request is a asychronous request, so there are two ways to make
+it so that we can wait for the axios request to complete before moving onto 
+logging the number of images fetched in the function.
+
+Method 1:
+Whenever we make a request to axios, it returns a promise object. We can 
+chain on .then as follows: 
+
+onSearchSubmit (term){
+    axios.get ('https://api.unsplash.com/search/photos', {
+    params: {query: term},
+    headers: {
+        Authorization: 'Client-ID n-T-wgrEgXFEPrBwFWwb6hwfhehvimCFowi8rX8qIlc'
+    }
+
+}).then ( (response) => {
+        console.log (response);
+    } 
+)
+
+This logs the whole object returned from the search query, including the status
+(200 for request was successful), statusText, config for the request, and most
+importantly, the data.results property that contains the list of images returned.
+
+
+
+
 */
