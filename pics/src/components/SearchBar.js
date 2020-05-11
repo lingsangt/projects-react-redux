@@ -52,13 +52,17 @@ class SearchBar extends React.Component {
     <form onSubmit={() => this.onFormSubmit ()} ... 
 
     */
-
     onFormSubmit = event => {
 
         //Don't want the form to automatically submit itself and refresh the page
         event.preventDefault ();
 
-
+        /*
+        Note that in a functional component, we would write props.onSubmit, whereas
+        because we are in a class component here, we have to write this.props.onSubmit
+        here instead.
+        */
+        this.props.onSubmit (this.state.term);
     }
     
     render(){
