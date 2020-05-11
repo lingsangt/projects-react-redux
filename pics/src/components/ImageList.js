@@ -10,9 +10,14 @@ const ImageList = (props) => {
     must be matched to items currently in the DOM via keys. We use the ID of 
     the items as the key for the item because the ID often uniquely identifies 
     the item.
+
+    
+    React often requests for an alt prop as well, in order to give a meaningful 
+    description if the image is not available. We thus have as well
+    
     */
     const images = props.images.map ( (image) => {
-        return <img key={image.id} src={image.urls.regular} />;
+        return <img alt={image.description} key={image.id} src={image.urls.regular} />;
     });
 
     return <div>{images}</div>;
