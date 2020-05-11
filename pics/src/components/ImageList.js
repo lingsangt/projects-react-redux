@@ -14,10 +14,10 @@ const ImageList = (props) => {
     
     React often requests for an alt prop as well, in order to give a meaningful 
     description if the image is not available. We thus have as well
-    
+    alt={image.description}
     */
-    const images = props.images.map ( (image) => {
-        return <img alt={image.description} key={image.id} src={image.urls.regular} />;
+    const images = props.images.map ( ({description, id, urls}) => {
+        return <img alt={description} key={id} src={urls.regular} />;
     });
 
     return <div>{images}</div>;
