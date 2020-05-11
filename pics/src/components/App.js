@@ -15,6 +15,13 @@ class App extends React.Component {
 
     /*
     We have to use this.setState, so we use an arrow function.
+
+    If this were not an arrow function, the keyword 'this' in this.setState here
+    would refer to the object to the left of the dot that called this function, 
+    which is 'this.props' in the onFormSubmit function in SearchBar. 
+    'this.props' happens to be this.onSearchSubmit (as you can see in the 
+    render method of App.js)! So use an array function because you need 'this'
+    to be binded to an instance of App.
     */
     onSearchSubmit = async term => {
 
