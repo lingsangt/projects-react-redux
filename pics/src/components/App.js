@@ -2,8 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import unsplash from '../api/unsplash';
 
-import SearchBar from './SearchBar';
 
+import SearchBar from './SearchBar';
+import ImageList from './ImageList';
 
 class App extends React.Component {
 
